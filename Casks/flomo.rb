@@ -1,18 +1,21 @@
 cask "flomo" do
-  version "0.1.2"
-  sha256 "066377a737908ce164467c67355b0be61c6cb9102fceecd4c116a0c373791394"
+  version "0.1.3"
+  sha256 "4fce120cf75390968dc76469b23759722819a18ba4e2b3e996dca6020b4bf48c"
 
-  url "https://flomo.oss-cn-shanghai.aliyuncs.com/resource/flomo_v#{version}.zip",
-      verified: "flomo.oss-cn-shanghai.aliyuncs.com/"
+  url "https://flomo-resource.oss-cn-shanghai.aliyuncs.com/flomo_mac_v#{version}.zip",
+      verified: "flomo-resource.oss-cn-shanghai.aliyuncs.com/"
   name "flomo"
   desc "Memo note taking and management app"
   homepage "https://flomoapp.com/"
 
   livecheck do
-    url "https://help.flomoapp.com/basic/app"
-    strategy :page_match
-    regex(/flomo_v(\d+(?:\.\d+)*)\.zip/i)
+    url "https://flomoapp.com/api/mac/latest/"
+    strategy :page_match do |page|
+      JSON.parse(page)["version"]
+    end
   end
+
+  depends_on macos: ">= :catalina"
 
   app "flomo.app"
 

@@ -1,11 +1,11 @@
 cask "pycharm" do
-  version "2021.1.2,211.7442.45"
+  version "2021.2.1,212.5080.64"
 
   if Hardware::CPU.intel?
-    sha256 "053911e24c9e19b597e84076e52601b6fc5e2efae8d195b2c43ea8fd01aa5261"
+    sha256 "b875d12f1e45ee36e01a0429809329993a91aa9c2f8f56adb07e86f94960975a"
     url "https://download.jetbrains.com/python/pycharm-professional-#{version.before_comma}.dmg"
   else
-    sha256 "27f18b4de875a61137d41144c8f523b3c0fab9f8de6d730bfb77cfd2cd56c755"
+    sha256 "aff795b7cf46a20f49e31364955f37a7045371a387e453e58d8553f63f79c7be"
     url "https://download.jetbrains.com/python/pycharm-professional-#{version.before_comma}-aarch64.dmg"
   end
 
@@ -38,12 +38,13 @@ cask "pycharm" do
   end
 
   zap trash: [
+    "~/Library/Preferences/com.jetbrains.pycharm.plist",
+    "~/Library/Preferences/jetbrains.pycharm.*.plist",
+    "~/Library/Preferences/PyCharm#{version.major_minor}",
     "~/Library/Application Support/PyCharm#{version.major_minor}",
     "~/Library/Application Support/JetBrains/PyCharm#{version.major_minor}",
-    "~/Library/Caches/PyCharm#{version.major_minor}",
-    "~/Library/Logs/PyCharm#{version.major_minor}",
-    "~/Library/Preferences/PyCharm#{version.major_minor}",
-    "~/Library/Preferences/jetbrains.pycharm.*.plist",
+    "~/Library/Caches/JetBrains/PyCharm#{version.major_minor}",
+    "~/Library/Logs/JetBrains/PyCharm#{version.major_minor}",
     "~/Library/Saved Application State/com.jetbrains.pycharm.savedState",
   ]
 end

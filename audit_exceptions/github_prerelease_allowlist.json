@@ -8,6 +8,7 @@
   "duplicati": "all",
   "extraterm": "all",
   "freetube": "all",
+  "ghdl": "all",
   "graphsketcher": "all",
   "haptickey": "all",
   "imagemin": "all",
@@ -31,5 +32,6 @@
   "steveschow-gfxcardstatus": "all",
   "themeengine": "all",
   "toggl-track": "all",
+  "vial": "all",
   "xit": "all"
 }

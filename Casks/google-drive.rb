@@ -1,5 +1,5 @@
 cask "google-drive" do
-  version "48.0.13"
+  version "50.0.11"
   sha256 :no_check
 
   url "https://dl.google.com/drive-file-stream/GoogleDrive.dmg"
@@ -12,15 +12,21 @@ cask "google-drive" do
     strategy :extract_plist
   end
 
+  auto_updates true
   depends_on macos: ">= :el_capitan"
 
   pkg "GoogleDrive.pkg"
 
+  # Some launchctl and pkgutil items are shared with other Google apps, they should only be removed in the zap stanza
+  # See: https://github.com/Homebrew/homebrew-cask/pull/92704#issuecomment-727163169
+  # launchctl: com.google.keystone.daemon, com.google.keystone.system.agent, com.google.keystone.system.xpcservice
+  # pkgutil: com.google.pkg.Keystone
   uninstall login_item: "Google Drive",
             quit:       "com.google.drivefs",
             pkgutil:    [
-              "com.google.drivefs",
+              "com.google.drivefs.arm64",
               "com.google.drivefs.x86_64",
+              "com.google.drivefs.filesystems.dfsfuse.arm64",
               "com.google.drivefs.filesystems.dfsfuse.x86_64",
               "com.google.drivefs.shortcuts",
             ]
@@ -48,6 +54,9 @@ cask "google-drive" do
         "com.google.keystone.daemon",
         "com.google.keystone.xpcservice",
         "com.google.keystone.system.xpcservice",
+      ],
+      pkgutil:   [
+        "com.google.pkg.Keystone",
       ]
 
   caveats <<~EOS
